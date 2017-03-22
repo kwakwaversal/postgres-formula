@@ -147,4 +147,10 @@ postgresql-running:
     - watch:
       - file: postgresql-pg_hba
 
+{%- else %}
+
+postgresql-running:
+  test.show_notification:
+    - text: The 'postgres.bake_image' Pillar is enabled. This postgresql-running is now a NOOP state.
+
 {%- endif %}

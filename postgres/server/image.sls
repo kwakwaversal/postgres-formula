@@ -12,10 +12,10 @@ include:
 
 postgresql-start:
   cmd.run:
-    - name: pg_ctl -D {{ postgres.conf_dir }} -l logfile start
+    - name: pg_ctlcluster {{ postgres.version }} main start
     - runas: {{ postgres.user }}
     - unless:
-      - ps -p $(head -n 1 {{ postgres.conf_dir }}/postmaster.pid) 2>/dev/null
+      - ps -p $(head -n 1 /var/lib/postgresql/{{ postgres.version }}/main/postmaster.pid) 2>/dev/null
     - require:
       - file: postgresql-pg_hba
 
